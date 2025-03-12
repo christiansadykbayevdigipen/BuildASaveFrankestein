@@ -30,6 +30,10 @@ public class MG1 : MonoBehaviour
 
     private void Awake()
     {
+    }
+
+    public void StartMinigame()
+    {
         // Start the Minigame.
         Head.Activated = true;
         m_CurrentlySelectedBP = Head;
