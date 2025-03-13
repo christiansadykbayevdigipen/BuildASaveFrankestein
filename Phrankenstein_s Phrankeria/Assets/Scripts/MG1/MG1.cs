@@ -21,6 +21,7 @@ public class MG1 : MonoBehaviour
     // Private Fields
     private BodyPart m_CurrentlySelectedBP;
     private float m_Points;
+    private bool m_IsComplete = false;
 
     // Public Fields
     public float Points
@@ -63,6 +64,8 @@ public class MG1 : MonoBehaviour
 
     private void Update()
     {
+        if (m_IsComplete) return;
+
         // Stops the oscillation of the body part
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -87,6 +90,7 @@ public class MG1 : MonoBehaviour
                     // This is the last option! Don't switch to anything else...
                     TallyBodyPart();
                     Debug.Log("The legs bodypart got an accuracy of: " + m_CurrentlySelectedBP.GetAccuracy().ToString());
+                    m_IsComplete = true;
                     break;
                 default:
                     Debug.Log("Error! BodyPartType variable m_CurrentlySelectedBP.PartType is not set to a proper BodyPartType value?");
@@ -103,5 +107,10 @@ public class MG1 : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool IsComplete()
+    {
+        return m_IsComplete;
     }
 }
