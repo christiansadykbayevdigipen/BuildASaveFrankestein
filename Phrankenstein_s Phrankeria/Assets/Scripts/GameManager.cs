@@ -2,7 +2,9 @@
 // This script handles the behaviour of the game. This script contains locations for each seperate mini game, since all of the minigames will be in the same scene. This is so that there is seamlessness between each minigame, and there isn't any hiccups trying to copy information over scenes.
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Vector2 MiniGame1CameraLocation;
     public MG1 MiniGame1;
     public Customer Customer1;
+    public TMP_Text InfoText;
 
     // Private Fields
     private bool m_PlayingMinigames;
@@ -31,7 +34,9 @@ public class GameManager : MonoBehaviour
         {
             if(!m_AlreadyPrintedFailMsg)
             {
-                Debug.Log("You Failed!!! Bye!");
+                //m_Strikes = 0;
+                InfoText.text = "You have failed.";
+                SceneManager.LoadScene("FailureScene");
                 m_AlreadyPrintedFailMsg = true;
             }
             return;
@@ -51,14 +56,24 @@ public class GameManager : MonoBehaviour
             m_PlayingMinigames = false;
             if (MiniGame1.GetWinState())
             {
-                Debug.Log("Successfully completed Customer's order! Points alloted: " + MiniGame1.Points);
+                StartCoroutine(InformPlayer("Successfully completed Customer's order! Points alloted: " + MiniGame1.Points, 2.0f));
                 Customer1.State = CustomerState.Received;
             }
             else
             {
-                Debug.Log("Terrible job! If you mess up three times, you will be demoted to customer!");
+                StartCoroutine(InformPlayer("Terrible job! If you mess up three times, you will be demoted to customer!", 2.0f));
+                Customer1.State = CustomerState.Angry;
                 m_Strikes++;
             }
         }
+    }
+
+    private IEnumerator InformPlayer(string text, float autoRemoveTime)
+    {
+        InfoText.text = text;
+
+        yield return new WaitForSeconds(autoRemoveTime);
+
+        InfoText.text = "";
     }
 }

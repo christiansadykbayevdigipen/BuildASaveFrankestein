@@ -23,6 +23,10 @@ public class MG1 : MonoBehaviour
     private float m_Points;
     private bool m_IsComplete = false;
 
+    private Vector2 HeadStart;
+    private Vector2 TorsoStart;
+    private Vector2 LegsStart;
+
     // Public Fields
     public float Points
     {
@@ -31,13 +35,22 @@ public class MG1 : MonoBehaviour
 
     private void Awake()
     {
+        HeadStart = Head.transform.position;
+        TorsoStart = Torso.transform.position;
+        LegsStart = Legs.transform.position;
     }
 
     public void StartMinigame()
     {
+        Head.transform.position = HeadStart;
+        Torso.transform.position = TorsoStart;
+        Legs.transform.position = LegsStart;
+
         // Start the Minigame.
         Head.Activated = true;
         m_CurrentlySelectedBP = Head;
+        m_IsComplete = false;
+        m_Points = 0;
     }
 
     /// <summary>
