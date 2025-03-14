@@ -5,6 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Accuracy
+{
+    Perfect,
+    Great,
+    Okay,
+    Terrible
+}
+
 public enum BodyPartType
 {
     Head,
@@ -22,6 +30,8 @@ public class BodyPart : MonoBehaviour
 {
     // Editor Fields
     public BodyPartType PartType;
+    public Vector2 PerfectPosition;
+    public float PerfectDistance, GreatDistance, OkayDistance;
 
     // Controls how fast the body part oscilates back and forth between the bed. Effectively changes the difficulty of that particular body part.
     public float OscillatorSpeed;
@@ -35,6 +45,9 @@ public class BodyPart : MonoBehaviour
     private Vector2 m_EndingLocation;
     private Oscillation m_CurrentDirection;
 
+    // Public Fields
+    public bool Activated = false;
+
     private void Awake()
     {
         m_StartingLocation = transform.position;
@@ -44,6 +57,8 @@ public class BodyPart : MonoBehaviour
 
     private void Update()
     {
+        if (!Activated)
+            return;
 
         switch (m_CurrentDirection)
         {
@@ -69,5 +84,15 @@ public class BodyPart : MonoBehaviour
                 Debug.Log("Error! Oscillator variable m_CurrentDirection is not set to a proper Oscillation value?");
                 return;
         }
+    }
+
+    public Accuracy GetAccuracy()
+    {
+        float dist = Vector2.Distance(transform.position, PerfectPosition);
+
+        if (dist <= PerfectDistance) return Accuracy.Perfect;
+        else if (dist <= GreatDistance) return Accuracy.Great;
+        else if (dist <= OkayDistance) return Accuracy.Okay;
+        else return Accuracy.Terrible;
     }
 }
