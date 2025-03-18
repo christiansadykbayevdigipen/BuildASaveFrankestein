@@ -5,15 +5,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MG1 : MonoBehaviour
+public class MG1 : MiniGame
 {
     // Editor Fields
-    public BodyPart Head;
-    public BodyPart Torso;
-    public BodyPart Legs;
+    public Vector2 HeadStart;
+    public Vector2 TorsoStart;
+    public Vector2 LegsStart;
+
+    public Vector2 HeadEnd;
+    public Vector2 TorsoEnd;
+    public Vector2 LegsEnd;
 
     /*These reward fields specify how many points to give when you get the respective accuracy level on a body part.*/
-    
+
     public float PerfectReward;
     public float GreatReward;
     public float OkayReward;
@@ -23,9 +27,10 @@ public class MG1 : MonoBehaviour
     private float m_Points;
     private bool m_IsComplete = false;
 
-    private Vector2 HeadStart;
-    private Vector2 TorsoStart;
-    private Vector2 LegsStart;
+    // Public Fields
+    public BodyPart Head;
+    public BodyPart Torso;
+    public BodyPart Legs;
 
     // Public Fields
     public float Points
@@ -35,22 +40,36 @@ public class MG1 : MonoBehaviour
 
     private void Awake()
     {
-        HeadStart = Head.transform.position;
-        TorsoStart = Torso.transform.position;
-        LegsStart = Legs.transform.position;
     }
 
-    public void StartMinigame()
+    public override void StartMinigame()
     {
         Head.transform.position = HeadStart;
         Torso.transform.position = TorsoStart;
         Legs.transform.position = LegsStart;
+
+        Head.EndingLocation = Mathf.Abs(Vector2.Distance(HeadStart, HeadEnd));
+        Torso.EndingLocation = Mathf.Abs(Vector2.Distance(TorsoStart, TorsoEnd));
+        Legs.EndingLocation = Mathf.Abs(Vector2.Distance(LegsStart, LegsEnd));
 
         // Start the Minigame.
         Head.Activated = true;
         m_CurrentlySelectedBP = Head;
         m_IsComplete = false;
         m_Points = 0;
+    }
+
+    public override void StopMinigame()
+    {
+        Head.transform.position = HeadStart;
+        Torso.transform.position = TorsoStart;
+        Legs.transform.position = LegsStart;
+
+        Head.Activated = false;
+        Torso.Activated = false;
+        Legs.Activated = false;
+        m_CurrentlySelectedBP = null;
+        m_IsComplete = true;
     }
 
     /// <summary>

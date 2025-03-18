@@ -36,6 +36,7 @@ public class Customer : MonoBehaviour
     // Private Fields
     private CustomerState m_State;
     private float m_CurrentCharacterDelay;
+    private List<BodyPartColor> m_Order;
 
     // Public Fields
     public CustomerState State
@@ -44,8 +45,14 @@ public class Customer : MonoBehaviour
         set { m_State = value; }
     }
 
+    public List<BodyPartColor> Order
+    {
+        get { return m_Order; }
+    }
+
     private void Awake()
     {
+        m_Order = new List<BodyPartColor>();
     }
 
     private void Update()
@@ -72,6 +79,13 @@ public class Customer : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.Return))
             {
+                BodyPartColor[] availableColors = { BodyPartColor.Red,BodyPartColor.Blue };
+
+                for(int i = 0; i < 3; i++)
+                {
+                    int randomint = Random.Range(0, 2);
+                    m_Order.Add(availableColors[randomint]);
+                }
                 m_State = CustomerState.Waiting;
                 CustomerSpeech.text = "";
             }
@@ -122,9 +136,6 @@ public class Customer : MonoBehaviour
 
             m_TypewriterIndex++;
             yield return new WaitForSeconds(m_CurrentCharacterDelay);
-
         }
-
     }
-
 }

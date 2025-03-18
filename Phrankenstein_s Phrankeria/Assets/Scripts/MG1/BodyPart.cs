@@ -26,12 +26,21 @@ public enum Oscillation
     Down
 }
 
+[System.Serializable]
+public enum BodyPartColor
+{
+    Red,
+    Blue
+}
+
+[System.Serializable]
 public class BodyPart : MonoBehaviour
 {
     // Editor Fields
     public BodyPartType PartType;
     public Vector2 PerfectPosition;
     public float PerfectDistance, GreatDistance, OkayDistance;
+    public BodyPartColor Color;
 
     // Controls how fast the body part oscilates back and forth between the bed. Effectively changes the difficulty of that particular body part.
     public float OscillatorSpeed;
@@ -44,21 +53,29 @@ public class BodyPart : MonoBehaviour
     private Vector2 m_StartingLocation;
     private Vector2 m_EndingLocation;
     private Oscillation m_CurrentDirection;
+    private bool m_PerformedFirstTime = false;
 
     // Public Fields
     public bool Activated = false;
 
+
     private void Awake()
     {
-        m_StartingLocation = transform.position;
-        m_EndingLocation = new Vector2(transform.position.x, transform.position.y - EndingLocation);
-        m_CurrentDirection = Oscillation.Down;
+
     }
 
     private void Update()
     {
         if (!Activated)
             return;
+
+        if(Activated && !m_PerformedFirstTime)
+        {
+            m_StartingLocation = transform.position;
+            m_EndingLocation = new Vector2(transform.position.x, transform.position.y - EndingLocation);
+            m_CurrentDirection = Oscillation.Down;
+            m_PerformedFirstTime = true;
+        }
 
         switch (m_CurrentDirection)
         {

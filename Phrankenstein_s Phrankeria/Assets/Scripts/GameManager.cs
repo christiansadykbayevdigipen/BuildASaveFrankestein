@@ -6,24 +6,36 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum GameState
+{
+    CustomerInteraction,
+    Minigame0Started,
+    Minigame0Complete,
+    Minigame1Started,
+    Minigame1Complete,
+    AllGamesDone,
+}
+
 public class GameManager : MonoBehaviour
 {
     // Editor Fields
     public Vector2 StoreLocation;
+    public Vector2 MiniGame0CameraLocation;
     public Vector2 MiniGame1CameraLocation;
+    public MG0 MiniGame0;
     public MG1 MiniGame1;
     public Customer Customer1;
     public TMP_Text InfoText;
 
     // Private Fields
-    private bool m_PlayingMinigames;
     private int m_Strikes;
     private bool m_AlreadyPrintedFailMsg;
+    private GameState m_CurrentState;
 
     private void Awake()
     {
+        m_CurrentState = GameState.CustomerInteraction;
         Customer1.State = CustomerState.Walking;
-        m_PlayingMinigames = false;
         m_Strikes = 0;
         m_AlreadyPrintedFailMsg = false;
     }
@@ -42,18 +54,37 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if(Customer1.State == CustomerState.Waiting && !m_PlayingMinigames)
+        if (Customer1.State == CustomerState.Waiting && m_CurrentState == GameState.CustomerInteraction)
         {
-            m_PlayingMinigames = true;
+            print("Starting minigame 0");
+            m_CurrentState = GameState.Minigame0Started;
+            Camera.main.transform.position = MiniGame0CameraLocation;
+            MiniGame0.StartMinigame();
+        }
 
+        if(MiniGame0.IsComplete() && m_CurrentState == GameState.Minigame0Started)
+        {
+            print("Starting minigame 1");
+            m_CurrentState = GameState.Minigame0Complete;
+            m_CurrentState = GameState.Minigame1Started;
             Camera.main.transform.position = MiniGame1CameraLocation;
+
+            MiniGame1.Head = GameObject.Instantiate(MiniGame0.Head);
+            MiniGame1.Torso = GameObject.Instantiate(MiniGame0.Torso);
+            MiniGame1.Legs = GameObject.Instantiate(MiniGame0.Legs);
+
+            MiniGame0.StopMinigame();
             MiniGame1.StartMinigame();
         }
 
-        if(MiniGame1.IsComplete() && m_PlayingMinigames)
+        if(MiniGame1.IsComplete() && m_CurrentState == GameState.Minigame1Started)
         {
+            #region DONT LOOK IN HERE
+                        m_CurrentState = GameState.Minigame1Complete;
+                        m_CurrentState = GameState.AllGamesDone;
+                        m_CurrentState = GameState.CustomerInteraction;
+            #endregion
             Camera.main.transform.position = StoreLocation;
-            m_PlayingMinigames = false;
             if (MiniGame1.GetWinState())
             {
                 StartCoroutine(InformPlayer("Successfully completed Customer's order! Points alloted: " + MiniGame1.Points, 2.0f));
@@ -65,6 +96,11 @@ public class GameManager : MonoBehaviour
                 Customer1.State = CustomerState.Angry;
                 m_Strikes++;
             }
+
+            MiniGame1.StopMinigame();
+            GameObject.Destroy(MiniGame1.Head.gameObject);
+            GameObject.Destroy(MiniGame1.Torso.gameObject);
+            GameObject.Destroy(MiniGame1.Legs.gameObject);
         }
     }
 
