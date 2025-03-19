@@ -71,21 +71,24 @@ public class Customer : MonoBehaviour
 
         if(m_State == CustomerState.Talking)
         {
-            StartCoroutine(Typewriter("Hi, can I get a Phrankenstein with double Phrankey's, hold the Phrankenmayo?", 0.08f, CustomerState.Ask));
+            m_Order.Clear();
+            BodyPartColor[] availableColors = { BodyPartColor.Red, BodyPartColor.Blue };
+
+            for (int i = 0; i < 3; i++)
+            {
+                int randomint = Random.Range(0, 2);
+                m_Order.Add(availableColors[randomint]);
+            }
+
+            StartCoroutine(Typewriter("Hi, can I get a Phrankenstein with double Phrankey's, hold the Phrankenmayo? (" + m_Order[0].ToString() + ", " + m_Order[1].ToString() + ", " + m_Order[2].ToString() + ")", 0.08f, CustomerState.Ask));
             m_State = CustomerState.None;
         }
 
         if(m_State == CustomerState.Ask)
         {
-            if(Input.GetKeyDown(KeyCode.Return))
+            //if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetMouseButtonDown(0))
             {
-                BodyPartColor[] availableColors = { BodyPartColor.Red,BodyPartColor.Blue };
-
-                for(int i = 0; i < 3; i++)
-                {
-                    int randomint = Random.Range(0, 2);
-                    m_Order.Add(availableColors[randomint]);
-                }
                 m_State = CustomerState.Waiting;
                 CustomerSpeech.text = "";
             }
@@ -99,7 +102,8 @@ public class Customer : MonoBehaviour
 
         if(m_State == CustomerState.RemoveYourself)
         {
-            if(Input.GetKeyDown(KeyCode.Return))
+            //if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetMouseButtonDown(0))
             {
                 transform.position = StartingPosition;
                 CustomerSpeech.text = "";
@@ -113,7 +117,8 @@ public class Customer : MonoBehaviour
             m_State = CustomerState.None;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        //if (Input.GetKeyDown(KeyCode.Return))
+        if(Input.GetMouseButtonDown(0))
             m_CurrentCharacterDelay = 0;
     }
 

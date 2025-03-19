@@ -2718,7 +2718,7 @@ MonoBehaviour:
   - {fileID: 703235532}
   - {fileID: 503118154}
   - {fileID: 2122246173}
-  ClickDistance: 0.2
+  ClickDistance: 0.4
   Head: {fileID: 0}
   Torso: {fileID: 0}
   Legs: {fileID: 0}

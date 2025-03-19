@@ -13,4 +13,14 @@ public class MiniGame : MonoBehaviour
     {
 
     }
+
+    public virtual bool GetWinState()
+    {
+        return false;
+    }
+
+    public virtual bool IsComplete()
+    {
+        return false;
+    }
 }

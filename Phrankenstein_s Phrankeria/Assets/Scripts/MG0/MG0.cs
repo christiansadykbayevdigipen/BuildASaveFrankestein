@@ -21,12 +21,23 @@ public class MG0 : MiniGame
     // Private Fields
     private bool m_MinigameRunning;
 
+    private BodyPartColor RequestedHead;
+    private BodyPartColor RequestedTorso;
+    private BodyPartColor RequestedLegs;
+
     public override void StartMinigame()
     {
         Head = null;
         Torso = null;
         Legs = null;
         m_MinigameRunning = true;
+    }
+
+    public void GiveCustomerParameters(BodyPartColor HeadColor, BodyPartColor TorsoColor, BodyPartColor LegsColor)
+    {
+        RequestedHead = HeadColor;
+        RequestedTorso = TorsoColor;
+        RequestedLegs = LegsColor;
     }
 
     public override void StopMinigame()
@@ -68,9 +79,19 @@ public class MG0 : MiniGame
 
     }
 
-    public bool IsComplete()
+    public override bool IsComplete()
     {
         if (Head != null && Torso != null && Legs != null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public override bool GetWinState()
+    {
+        if (Head.Color == RequestedHead && Torso.Color == RequestedTorso && Legs.Color == RequestedLegs)
         {
             return true;
         }

@@ -14,6 +14,7 @@ public enum GameState
     Minigame1Started,
     Minigame1Complete,
     AllGamesDone,
+    Failure
 }
 
 public class GameManager : MonoBehaviour
@@ -40,6 +41,13 @@ public class GameManager : MonoBehaviour
         m_AlreadyPrintedFailMsg = false;
     }
 
+    private void _InvokeFailure()
+    {
+        StartCoroutine(InformPlayer("Terrible job! If you mess up three times, you will be demoted to customer!", 2.0f));
+        Customer1.State = CustomerState.Angry;
+        m_Strikes++;
+    }
+
     private void Update()
     {
         if(m_Strikes >= 3)
@@ -59,11 +67,21 @@ public class GameManager : MonoBehaviour
             print("Starting minigame 0");
             m_CurrentState = GameState.Minigame0Started;
             Camera.main.transform.position = MiniGame0CameraLocation;
+            MiniGame0.GiveCustomerParameters(Customer1.Order[0], Customer1.Order[1], Customer1.Order[2]);
             MiniGame0.StartMinigame();
         }
 
         if(MiniGame0.IsComplete() && m_CurrentState == GameState.Minigame0Started)
         {
+/*            if(!MiniGame0.GetWinState() && Customer1.State == CustomerState.Waiting)
+            {
+                print("Minigame 0 failure invoking failure");
+                Camera.main.transform.position = StoreLocation;
+                _InvokeFailure();
+                m_CurrentState = GameState.CustomerInteraction;
+                return;
+            }*/
+
             print("Starting minigame 1");
             m_CurrentState = GameState.Minigame0Complete;
             m_CurrentState = GameState.Minigame1Started;
@@ -79,29 +97,32 @@ public class GameManager : MonoBehaviour
 
         if(MiniGame1.IsComplete() && m_CurrentState == GameState.Minigame1Started)
         {
-            #region DONT LOOK IN HERE
-                        m_CurrentState = GameState.Minigame1Complete;
-                        m_CurrentState = GameState.AllGamesDone;
-                        m_CurrentState = GameState.CustomerInteraction;
-            #endregion
-            Camera.main.transform.position = StoreLocation;
-            if (MiniGame1.GetWinState())
-            {
-                StartCoroutine(InformPlayer("Successfully completed Customer's order! Points alloted: " + MiniGame1.Points, 2.0f));
-                Customer1.State = CustomerState.Received;
-            }
-            else
-            {
-                StartCoroutine(InformPlayer("Terrible job! If you mess up three times, you will be demoted to customer!", 2.0f));
-                Customer1.State = CustomerState.Angry;
-                m_Strikes++;
-            }
-
-            MiniGame1.StopMinigame();
-            GameObject.Destroy(MiniGame1.Head.gameObject);
-            GameObject.Destroy(MiniGame1.Torso.gameObject);
-            GameObject.Destroy(MiniGame1.Legs.gameObject);
+            m_CurrentState = GameState.Minigame1Complete;
+            m_CurrentState = GameState.AllGamesDone;
+            StartCoroutine(Finish());
         }
+    }
+
+    IEnumerator Finish()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        m_CurrentState = GameState.CustomerInteraction;
+        Camera.main.transform.position = StoreLocation;
+        if (MiniGame1.GetWinState() && MiniGame0.GetWinState())
+        {
+            StartCoroutine(InformPlayer("Successfully completed Customer's order! Points alloted: " + MiniGame1.Points, 2.0f));
+            Customer1.State = CustomerState.Received;
+        }
+        else
+        {
+            _InvokeFailure();
+        }
+
+        MiniGame1.StopMinigame();
+        GameObject.Destroy(MiniGame1.Head.gameObject);
+        GameObject.Destroy(MiniGame1.Torso.gameObject);
+        GameObject.Destroy(MiniGame1.Legs.gameObject);
     }
 
     private IEnumerator InformPlayer(string text, float autoRemoveTime)

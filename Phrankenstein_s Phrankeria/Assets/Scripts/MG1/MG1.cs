@@ -26,6 +26,7 @@ public class MG1 : MiniGame
     private BodyPart m_CurrentlySelectedBP;
     private float m_Points;
     private bool m_IsComplete = false;
+    private bool m_IsRunning = false;
 
     // Public Fields
     public BodyPart Head;
@@ -44,6 +45,7 @@ public class MG1 : MiniGame
 
     public override void StartMinigame()
     {
+        m_IsRunning = true;
         Head.transform.position = HeadStart;
         Torso.transform.position = TorsoStart;
         Legs.transform.position = LegsStart;
@@ -61,6 +63,7 @@ public class MG1 : MiniGame
 
     public override void StopMinigame()
     {
+        m_IsRunning = false;
         Head.transform.position = HeadStart;
         Torso.transform.position = TorsoStart;
         Legs.transform.position = LegsStart;
@@ -97,9 +100,12 @@ public class MG1 : MiniGame
     private void Update()
     {
         if (m_IsComplete) return;
+        if (!m_IsRunning) return;
+        
 
         // Stops the oscillation of the body part
-        if(Input.GetKeyDown(KeyCode.Space))
+        //if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             m_CurrentlySelectedBP.Activated = false;
 
@@ -131,7 +137,7 @@ public class MG1 : MiniGame
         }
     }
 
-    public bool GetWinState()
+    public override bool GetWinState()
     {
         if(Head.GetAccuracy() != Accuracy.Terrible && Torso.GetAccuracy() != Accuracy.Terrible && Legs.GetAccuracy() != Accuracy.Terrible)
         {
@@ -141,7 +147,7 @@ public class MG1 : MiniGame
         return false;
     }
 
-    public bool IsComplete()
+    public override bool IsComplete()
     {
         return m_IsComplete;
     }
