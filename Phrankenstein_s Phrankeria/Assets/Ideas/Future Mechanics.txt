@@ -1,0 +1,4 @@
+﻿As time goes on, to increase difficulty, in Minigame 1 there will be an oscillator multiplier that the more orders the player takes, the more it adds to the oscillator multiplier to make it more difficult. So it will be harder. 
+
+It does a similar thing for the voltage knob. 
+

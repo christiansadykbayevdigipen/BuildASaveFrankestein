@@ -571,7 +571,7 @@ MonoBehaviour:
   GreatDistance: 0.4
   OkayDistance: 0.6
   Color: 0
-  OscillatorSpeed: 8
+  OscillatorSpeed: 10
   EndingLocation: 6
   Activated: 0
 --- !u!212 &503118155
@@ -1128,7 +1128,7 @@ MonoBehaviour:
   GreatDistance: 0.4
   OkayDistance: 0.6
   Color: 1
-  OscillatorSpeed: 8
+  OscillatorSpeed: 10
   EndingLocation: 6
   Activated: 0
 --- !u!212 &703235533
@@ -1309,7 +1309,7 @@ MonoBehaviour:
   GreatDistance: 0.4
   OkayDistance: 0.6
   Color: 0
-  OscillatorSpeed: 8
+  OscillatorSpeed: 10
   EndingLocation: 6
   Activated: 0
 --- !u!212 &741977870
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   GreatDistance: 0.4
   OkayDistance: 0.6
   Color: 1
-  OscillatorSpeed: 8
+  OscillatorSpeed: 10
   EndingLocation: 6
   Activated: 0
 --- !u!212 &1458907687
@@ -2408,7 +2408,7 @@ MonoBehaviour:
   GreatDistance: 0.4
   OkayDistance: 0.6
   Color: 0
-  OscillatorSpeed: 8
+  OscillatorSpeed: 10
   EndingLocation: 6
   Activated: 0
 --- !u!212 &1606561786
@@ -3765,7 +3765,7 @@ MonoBehaviour:
   GreatDistance: 0.4
   OkayDistance: 0.6
   Color: 1
-  OscillatorSpeed: 8
+  OscillatorSpeed: 10
   EndingLocation: 6
   Activated: 0
 --- !u!212 &2122246174
