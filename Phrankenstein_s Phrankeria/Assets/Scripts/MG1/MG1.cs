@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MG1 : MiniGame
@@ -16,6 +17,8 @@ public class MG1 : MiniGame
     public Vector2 TorsoEnd;
     public Vector2 LegsEnd;
 
+    public TMP_Text Feedback;
+
     /*These reward fields specify how many points to give when you get the respective accuracy level on a body part.*/
 
     public float PerfectReward;
@@ -27,6 +30,7 @@ public class MG1 : MiniGame
     private float m_Points;
     private bool m_IsComplete = false;
     private bool m_IsRunning = false;
+    private bool m_BreakFeedbackRoutineEarly = false;
 
     // Public Fields
     public BodyPart Head;
@@ -80,6 +84,14 @@ public class MG1 : MiniGame
     /// </summary>
     public void TallyBodyPart()
     {
+        if(Feedback.text != "")
+        {
+            m_BreakFeedbackRoutineEarly = true;
+            Feedback.text = "";
+        }
+
+        StartCoroutine(GiveFeedback(m_CurrentlySelectedBP.GetAccuracy().ToString()));
+
         switch(m_CurrentlySelectedBP.GetAccuracy())
         {
         case Accuracy.Perfect:
@@ -112,14 +124,14 @@ public class MG1 : MiniGame
             switch(m_CurrentlySelectedBP.PartType)
             {
             case BodyPartType.Head:
-                    Debug.Log("The head bodypart got an accuracy of: " + m_CurrentlySelectedBP.GetAccuracy().ToString());
+                    //Debug.Log("The head bodypart got an accuracy of: " + m_CurrentlySelectedBP.GetAccuracy().ToString());
                     TallyBodyPart();
                     m_CurrentlySelectedBP = Torso;
                     m_CurrentlySelectedBP.Activated = true;
 
                     break;
             case BodyPartType.Body:
-                    Debug.Log("The body bodypart got an accuracy of: " + m_CurrentlySelectedBP.GetAccuracy().ToString());
+                    //Debug.Log("The body bodypart got an accuracy of: " + m_CurrentlySelectedBP.GetAccuracy().ToString());
                     TallyBodyPart();
                     m_CurrentlySelectedBP = Legs;
                     m_CurrentlySelectedBP.Activated = true;
@@ -127,7 +139,7 @@ public class MG1 : MiniGame
                 case BodyPartType.Legs:
                     // This is the last option! Don't switch to anything else...
                     TallyBodyPart();
-                    Debug.Log("The legs bodypart got an accuracy of: " + m_CurrentlySelectedBP.GetAccuracy().ToString());
+                    //Debug.Log("The legs bodypart got an accuracy of: " + m_CurrentlySelectedBP.GetAccuracy().ToString());
                     m_IsComplete = true;
                     break;
                 default:
@@ -150,5 +162,19 @@ public class MG1 : MiniGame
     public override bool IsComplete()
     {
         return m_IsComplete;
+    }
+
+    public IEnumerator GiveFeedback(string feedback)
+    {
+        Feedback.text = feedback;
+        yield return new WaitForSeconds(1.0f);
+
+        if(m_BreakFeedbackRoutineEarly)
+        {
+            m_BreakFeedbackRoutineEarly = false;
+            yield break;
+        }
+
+        Feedback.text = "";
     }
 }
