@@ -140,6 +140,7 @@ public class Customer : MonoBehaviour
             CustomerSpeech.text += toDisplay.ToCharArray()[m_TypewriterIndex];
 
             m_TypewriterIndex++;
+
             yield return new WaitForSeconds(m_CurrentCharacterDelay);
         }
     }

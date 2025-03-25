@@ -10,7 +10,7 @@ using TMPro;
 
 public class VoltageMIniGame : MonoBehaviour
 {
-    //Public bools
+    // Public Fields
     public Transform pivotPoint;
     public GameObject LinePart;
     public GameObject WinBar;

@@ -13,6 +13,8 @@ public enum GameState
     Minigame0Complete,
     Minigame1Started,
     Minigame1Complete,
+    Minigame2Started,
+    Minigame2Complete,
     AllGamesDone,
     Failure
 }
@@ -23,10 +25,15 @@ public class GameManager : MonoBehaviour
     public Vector2 StoreLocation;
     public Vector2 MiniGame0CameraLocation;
     public Vector2 MiniGame1CameraLocation;
+    public Vector2 MiniGame2CameraLocation;
     public MG0 MiniGame0;
     public MG1 MiniGame1;
+    public MG2 MiniGame2;
     public Customer Customer1;
     public TMP_Text InfoText;
+
+    // Public Fields
+    public static GameManager MasterManager;
 
     // Private Fields
     private int m_Strikes;
@@ -35,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        MasterManager = this;
         m_CurrentState = GameState.CustomerInteraction;
         Customer1.State = CustomerState.Walking;
         m_Strikes = 0;
@@ -98,10 +106,29 @@ public class GameManager : MonoBehaviour
         if(MiniGame1.IsComplete() && m_CurrentState == GameState.Minigame1Started)
         {
             m_CurrentState = GameState.Minigame1Complete;
+        }
+
+        if(m_CurrentState == GameState.Minigame1Complete)
+        {
+            StartCoroutine(InformPlayer("You need 10 successful hits on the voltage meter!", 3.0f));
+            m_CurrentState = GameState.Minigame2Started;
+            MiniGame1.StopMinigame();
+            Camera.main.transform.position = MiniGame2CameraLocation;
+            MiniGame2.StartMinigame();
+        }
+
+        if(m_CurrentState == GameState.Minigame2Started && MiniGame2.IsComplete())
+        {
+            m_CurrentState = GameState.Minigame2Complete;
             m_CurrentState = GameState.AllGamesDone;
+            MiniGame2.StopMinigame();
             StartCoroutine(Finish());
         }
     }
+
+    private bool m_MG0State;
+    private bool m_MG1State;
+    private bool m_MG2State;
 
     IEnumerator Finish()
     {
@@ -109,7 +136,12 @@ public class GameManager : MonoBehaviour
 
         m_CurrentState = GameState.CustomerInteraction;
         Camera.main.transform.position = StoreLocation;
-        if (MiniGame1.GetWinState() && MiniGame0.GetWinState())
+
+        m_MG0State = MiniGame0.GetWinState();
+        m_MG1State = MiniGame1.GetWinState();
+        m_MG2State = MiniGame2.GetWinState();
+
+        if (MiniGame1.GetWinState() && MiniGame0.GetWinState() && MiniGame2.GetWinState())
         {
             StartCoroutine(InformPlayer("Successfully completed Customer's order! Points alloted: " + MiniGame1.Points, 2.0f));
             Customer1.State = CustomerState.Received;
@@ -125,7 +157,7 @@ public class GameManager : MonoBehaviour
         GameObject.Destroy(MiniGame1.Legs.gameObject);
     }
 
-    private IEnumerator InformPlayer(string text, float autoRemoveTime)
+    public IEnumerator InformPlayer(string text, float autoRemoveTime)
     {
         InfoText.text = text;
 

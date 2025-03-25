@@ -49,6 +49,18 @@ public class MG1 : MiniGame
 
     public override void StartMinigame()
     {
+        /*-----Refactor later-----*/
+        Head.transform.position = HeadStart;
+        Torso.transform.position = TorsoStart;
+        Legs.transform.position = LegsStart;
+
+        Head.Activated = false;
+        Torso.Activated = false;
+        Legs.Activated = false;
+        m_CurrentlySelectedBP = null;
+        /*!-----Refactor later-----*/
+
+
         m_IsRunning = true;
         Head.transform.position = HeadStart;
         Torso.transform.position = TorsoStart;
@@ -68,14 +80,6 @@ public class MG1 : MiniGame
     public override void StopMinigame()
     {
         m_IsRunning = false;
-        Head.transform.position = HeadStart;
-        Torso.transform.position = TorsoStart;
-        Legs.transform.position = LegsStart;
-
-        Head.Activated = false;
-        Torso.Activated = false;
-        Legs.Activated = false;
-        m_CurrentlySelectedBP = null;
         m_IsComplete = true;
     }
 
