@@ -15,14 +15,8 @@ public class MG2 : MiniGame
     public GameObject WinBar;
     public float StartingRotationSpeed = 50f;
     public float RotationAcceleration;
-    public float Radius = 2f;
-    public float MaxAngle = 90f;
-    public float MinAngle = -90f;
-    public float CurrentAngle = 0;
-    public float StartingAngle = 45f;
     public float Seconds = 30f;
     public int RequiredHits;
-    public Quaternion startRotation = Quaternion.identity;
     public Vector3[] Positions = new Vector3[]
     {
         new Vector3(0f, 2f, 0f),

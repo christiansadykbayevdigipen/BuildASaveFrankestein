@@ -17,13 +17,7 @@ public class VoltageMIniGame : MonoBehaviour
     public GameObject GameOver;
     public TMP_Text finalScoreText;
     public float rotationSpeed = 50f;
-    public float radius = 2f;
-    public float maxAngle = 90f;
-    public float minAngle = -90f;
-    public float currentAngle = 0;
-    public float startingPoint = 45f;
     public float Seconds = 30f;
-    public Quaternion startRotation = Quaternion.identity;
     //public Transform Win;
 
 
