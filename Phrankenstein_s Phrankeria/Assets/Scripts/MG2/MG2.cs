@@ -96,11 +96,11 @@ public class MG2 : MiniGame
 
             if (m_RotationSpeed > 0)
             {
-                m_RotationSpeed = Mathf.Min(m_RotationSpeed + RotationAcceleration, 180f); // Increase but cap at 180
+                m_RotationSpeed = /*Mathf.Min*/(m_RotationSpeed + RotationAcceleration/*, 180f*/); // Increase but cap at 180
             }
             else if (m_RotationSpeed < 0)
             {
-                m_RotationSpeed = Mathf.Max(m_RotationSpeed - RotationAcceleration, -180f); // Decrease but cap at -180
+                m_RotationSpeed = /*Mathf.Max*/(m_RotationSpeed - RotationAcceleration/*, -180f*/); // Decrease but cap at -180
             }
             else
             {
@@ -137,15 +137,27 @@ public class MG2 : MiniGame
         // Detection for if the needle is on the right point and if so then makes the point go to a new position
         if (Input.GetMouseButtonDown(0))
         {
-            // Firstly, switch directions.
-            m_RotationSpeed = -m_RotationSpeed;
 
             // Then, do the detection for the if the needle is correct position.
             if (LinePart.GetComponent<Collider2D>().IsTouching(WinBar.GetComponent<Collider2D>()))
             {
                 m_Score += 1;
                 WinBar.gameObject.SetActive(false);
+                Vector3 oldPos = WinBar.transform.position;
                 SetRandomPosition();
+
+                Vector3 newPos = WinBar.transform.position;
+
+                float newDir = newPos.x - oldPos.x;
+
+                if (newDir == 0)
+                    newDir = 1;
+
+                // This checks to see if the needle is rotating in the direction of the new dot. If not, then flip it.
+                if (m_RotationSpeed / Mathf.Abs(m_RotationSpeed) == newDir / Mathf.Abs(newDir))
+                {
+                    m_RotationSpeed = -m_RotationSpeed;
+                }
             }
             else
             {
