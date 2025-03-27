@@ -36,7 +36,7 @@ public class Customer : MonoBehaviour
     // Private Fields
     private CustomerState m_State;
     private float m_CurrentCharacterDelay;
-    private List<BodyPartColor> m_Order;
+    private List<BodyType> m_Order;
 
     // Public Fields
     public CustomerState State
@@ -45,14 +45,14 @@ public class Customer : MonoBehaviour
         set { m_State = value; }
     }
 
-    public List<BodyPartColor> Order
+    public List<BodyType> Order
     {
         get { return m_Order; }
     }
 
     private void Awake()
     {
-        m_Order = new List<BodyPartColor>();
+        m_Order = new List<BodyType>();
     }
 
     private void Update()
@@ -72,7 +72,7 @@ public class Customer : MonoBehaviour
         if(m_State == CustomerState.Talking)
         {
             m_Order.Clear();
-            BodyPartColor[] availableColors = { BodyPartColor.Red, BodyPartColor.Blue };
+            BodyType[] availableColors = { BodyType.Jacked, BodyType.Normal };
 
             for (int i = 0; i < 3; i++)
             {

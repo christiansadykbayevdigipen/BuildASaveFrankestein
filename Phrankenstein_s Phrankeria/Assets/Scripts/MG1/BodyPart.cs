@@ -27,10 +27,10 @@ public enum Oscillation
 }
 
 [System.Serializable]
-public enum BodyPartColor
+public enum BodyType
 {
-    Red,
-    Blue
+    Jacked,
+    Normal
 }
 
 [System.Serializable]
@@ -40,7 +40,7 @@ public class BodyPart : MonoBehaviour
     public BodyPartType PartType;
     public Vector2 PerfectPosition;
     public float PerfectDistance, GreatDistance, OkayDistance;
-    public BodyPartColor Color;
+    public BodyType BodyPartType;
 
     // Controls how fast the body part oscilates back and forth between the bed. Effectively changes the difficulty of that particular body part.
     public float OscillatorSpeed;
