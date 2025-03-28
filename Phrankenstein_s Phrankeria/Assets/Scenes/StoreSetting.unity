@@ -4315,6 +4315,8 @@ MonoBehaviour:
   RotationAcceleration: 20
   Seconds: 10
   RequiredHits: 10
+  MaximumStrikes: 3
+  startRotation: {x: 0, y: 0, z: 0, w: 1}
   Positions:
   - {x: -1.9, y: 36.3, z: 0}
   - {x: 0, y: 37.8, z: 0}
