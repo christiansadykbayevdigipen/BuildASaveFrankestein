@@ -23,14 +23,7 @@ public class MG2 : MiniGame
     // This field describes the maximum number of missed hits that a player can do before losing the order
     public int MaximumStrikes;
     public Quaternion startRotation = Quaternion.identity;
-    public Vector3[] Positions = new Vector3[]
-    {
-        new Vector3(0f, 2f, 0f),
-        new Vector3(-1.25f, 1.5f, 0f),
-        new Vector3(1.25f, 1.5f, 0f),
-        new Vector3(-1.9f, 0.5f, 0f),
-        new Vector3(1.9f, 0.5f, 0f)
-    };
+    public Transform[] Positions;
 
     // Private Fields
     private float m_RotationSpeed;
@@ -186,7 +179,7 @@ public class MG2 : MiniGame
             newIndex = Random.Range(0, Positions.Length);
         } while (newIndex == m_LastPositionsIndex);
 
-        WinBar.transform.position = Positions[newIndex];
+        WinBar.transform.position = Positions[newIndex].position;
         WinBar.gameObject.SetActive(true);
 
         m_LastPositionsIndex = newIndex;
