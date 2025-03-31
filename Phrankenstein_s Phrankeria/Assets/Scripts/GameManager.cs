@@ -2,6 +2,7 @@
 // This script handles the behaviour of the game. This script contains locations for each seperate mini game, since all of the minigames will be in the same scene. This is so that there is seamlessness between each minigame, and there isn't any hiccups trying to copy information over scenes.
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -129,6 +130,11 @@ public class GameManager : MonoBehaviour
     private bool m_MG0State;
     private bool m_MG1State;
     private bool m_MG2State;
+
+/*    IEnumerator StartMinigame(MiniGame g)
+    {
+
+    }*/
 
     IEnumerator Finish()
     {

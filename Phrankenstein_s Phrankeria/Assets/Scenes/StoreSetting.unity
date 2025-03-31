@@ -7113,16 +7113,18 @@ MonoBehaviour:
   PivotPoint: {fileID: 1060780967}
   LinePart: {fileID: 649748192}
   WinBar: {fileID: 1315418782}
-  StartingRotationSpeed: 120
-  RotationAcceleration: 20
+  StartingRotationSpeed: 80
+  RotationAcceleration: 5
   Seconds: 10
   RequiredHits: 10
+  MaximumStrikes: 3
+  startRotation: {x: 0, y: 0, z: 0, w: 1}
   Positions:
-  - {x: -1.9, y: 36.3, z: 0}
-  - {x: 0, y: 37.8, z: 0}
-  - {x: -1.25, y: 37.3, z: 0}
-  - {x: 1.9, y: 36.3, z: 0}
-  - {x: 1.25, y: 37.3, z: 0}
+  - {fileID: 187864594}
+  - {fileID: 180803499}
+  - {fileID: 673879419}
+  - {fileID: 1004778912}
+  - {fileID: 1073597245}
 --- !u!50 &1841620032
 Rigidbody2D:
   serializedVersion: 4

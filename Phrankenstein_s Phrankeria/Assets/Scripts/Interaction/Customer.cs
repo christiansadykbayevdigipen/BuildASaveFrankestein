@@ -80,7 +80,10 @@ public class Customer : MonoBehaviour
                 m_Order.Add(availableColors[randomint]);
             }
 
-            StartCoroutine(Typewriter("Hi, can I get a Phrankenstein with double Phrankey's, hold the Phrankenmayo? (" + m_Order[0].ToString() + ", " + m_Order[1].ToString() + ", " + m_Order[2].ToString() + ")", 0.08f, CustomerState.Ask));
+            string message = "Hello, can I get a Phrankenstein with a " + m_Order[0].ToString() + " head, a " + m_Order[1].ToString() + " body, and a " + m_Order[2].ToString() + " pair of legs?";
+
+            //StartCoroutine(Typewriter("Hi, can I get a Phrankenstein with double Phrankey's, hold the Phrankenmayo? (" + m_Order[0].ToString() + ", " + m_Order[1].ToString() + ", " + m_Order[2].ToString() + ")", 0.08f, CustomerState.Ask));
+            StartCoroutine(Typewriter(message, 0.08f, CustomerState.Ask));
             m_State = CustomerState.None;
         }
 

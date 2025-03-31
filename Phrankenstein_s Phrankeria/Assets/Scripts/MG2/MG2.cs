@@ -16,15 +16,14 @@ public class MG2 : MiniGame
     public float StartingRotationSpeed = 50f;
     public float RotationAcceleration;
     public float Seconds = 30f;
+
+    // The minimum number of hits that a player needs to get.
     public int RequiredHits;
-    public Vector3[] Positions = new Vector3[]
-    {
-        new Vector3(0f, 2f, 0f),
-        new Vector3(-1.25f, 1.5f, 0f),
-        new Vector3(1.25f, 1.5f, 0f),
-        new Vector3(-1.9f, 0.5f, 0f),
-        new Vector3(1.9f, 0.5f, 0f)
-    };
+
+    // This field describes the maximum number of missed hits that a player can do before losing the order
+    public int MaximumStrikes;
+    public Quaternion startRotation = Quaternion.identity;
+    public Transform[] Positions;
 
     // Private Fields
     private float m_RotationSpeed;
@@ -38,6 +37,7 @@ public class MG2 : MiniGame
 
     public override void StartMinigame()
     {
+        m_IsFirstFrame = true;
         m_IsRunning = true;
         m_IsComplete = false;
         m_Losses = 0;
@@ -57,7 +57,7 @@ public class MG2 : MiniGame
 
     public override bool GetWinState()
     {
-        return m_Score >= RequiredHits;
+        return m_Score >= RequiredHits && m_Losses < MaximumStrikes;
     }
 
     public override bool IsComplete()
@@ -103,10 +103,18 @@ public class MG2 : MiniGame
         }
     }
 
+    private bool m_IsFirstFrame = true;
+
     private void Update()
     {
         if (!m_IsRunning)
             return;
+
+        if(m_IsFirstFrame)
+        {
+            m_IsFirstFrame = false;
+            return;
+        }
 
         float zRotation = transform.eulerAngles.z;
 
@@ -155,6 +163,7 @@ public class MG2 : MiniGame
             }
             else
             {
+                StartCoroutine(GameManager.MasterManager.InformPlayer("Miss!", 0.5f));
                 m_Losses++;
             }
         }
@@ -170,7 +179,7 @@ public class MG2 : MiniGame
             newIndex = Random.Range(0, Positions.Length);
         } while (newIndex == m_LastPositionsIndex);
 
-        WinBar.transform.position = Positions[newIndex];
+        WinBar.transform.position = Positions[newIndex].position;
         WinBar.gameObject.SetActive(true);
 
         m_LastPositionsIndex = newIndex;
