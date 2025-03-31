@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
 
         if (MiniGame1.GetWinState() && MiniGame0.GetWinState() && MiniGame2.GetWinState())
         {
-            StartCoroutine(InformPlayer("Successfully completed Customer's order! Points alloted: " + MiniGame1.Points, 2.0f));
+            StartCoroutine(InformPlayer("Successfully completed Customer's order! Points alloted: " + (MiniGame1.Points + MiniGame2.Score), 2.0f));
             Customer1.State = CustomerState.Received;
         }
         else
