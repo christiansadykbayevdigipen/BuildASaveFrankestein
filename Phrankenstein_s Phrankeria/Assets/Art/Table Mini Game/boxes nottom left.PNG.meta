@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 69a6813bb574410409f805a9bfe0ac42
+guid: 5407cc77a9605b244abb83aa98e2b4d6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,43 +110,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boxes background_0
+      name: boxes nottom left_0
       rect:
         serializedVersion: 2
-        x: 35
-        y: 871
-        width: 414
-        height: 209
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b23df0ff6943af04e84a849c13a37008
-      internalID: 1355167582
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: boxes background_8
-      rect:
-        serializedVersion: 2
-        x: 1583
+        x: 0
         y: 0
-        width: 397
-        height: 621
+        width: 480
+        height: 677
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 58, z: 80, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5930d7cb93bbf31439f2081039ba1b24
-      internalID: -2111398964
+      spriteID: b34f95c9d7402f34391aa93d5db59238
+      internalID: -1179402080
       vertices: []
       indices: 
       edges: []
@@ -162,15 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      boxes background_0: 1355167582
-      boxes background_1: 2086833794
-      boxes background_2: 6778414
-      boxes background_3: 1984262923
-      boxes background_4: -671695116
-      boxes background_5: 1505787505
-      boxes background_6: 1905953023
-      boxes background_7: -935762860
-      boxes background_8: -2111398964
+      boxes nottom left_0: -1179402080
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
