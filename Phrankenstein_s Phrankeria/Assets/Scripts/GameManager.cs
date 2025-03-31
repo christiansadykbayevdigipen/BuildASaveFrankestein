@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public MG2 MiniGame2;
     public Customer Customer1;
     public TMP_Text InfoText;
+    public RandomContainer RandomContainer;
 
     // Public Fields
     public static GameManager MasterManager;
@@ -82,14 +83,16 @@ public class GameManager : MonoBehaviour
 
         if(MiniGame0.IsComplete() && m_CurrentState == GameState.Minigame0Started)
         {
-/*            if(!MiniGame0.GetWinState() && Customer1.State == CustomerState.Waiting)
-            {
-                print("Minigame 0 failure invoking failure");
-                Camera.main.transform.position = StoreLocation;
-                _InvokeFailure();
-                m_CurrentState = GameState.CustomerInteraction;
-                return;
-            }*/
+            /*            if(!MiniGame0.GetWinState() && Customer1.State == CustomerState.Waiting)
+                        {
+                            print("Minigame 0 failure invoking failure");
+                            Camera.main.transform.position = StoreLocation;
+                            _InvokeFailure();
+                            m_CurrentState = GameState.CustomerInteraction;
+                            return;
+                        }*/
+
+            RandomContainer.PlaySound(true);
 
             print("Starting minigame 1");
             m_CurrentState = GameState.Minigame0Complete;
@@ -107,10 +110,12 @@ public class GameManager : MonoBehaviour
         if(MiniGame1.IsComplete() && m_CurrentState == GameState.Minigame1Started)
         {
             m_CurrentState = GameState.Minigame1Complete;
+            RandomContainer.PlaySound(true);
         }
 
         if(m_CurrentState == GameState.Minigame1Complete)
         {
+            RandomContainer.PlaySound(true);
             StartCoroutine(InformPlayer("You need 10 successful hits on the voltage meter!", 3.0f));
             m_CurrentState = GameState.Minigame2Started;
             MiniGame1.StopMinigame();
@@ -120,6 +125,7 @@ public class GameManager : MonoBehaviour
 
         if(m_CurrentState == GameState.Minigame2Started && MiniGame2.IsComplete())
         {
+            RandomContainer.PlaySound(true);
             m_CurrentState = GameState.Minigame2Complete;
             m_CurrentState = GameState.AllGamesDone;
             MiniGame2.StopMinigame();
