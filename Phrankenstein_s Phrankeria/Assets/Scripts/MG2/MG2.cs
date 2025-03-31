@@ -25,6 +25,11 @@ public class MG2 : MiniGame
     public Quaternion startRotation = Quaternion.identity;
     public Transform[] Positions;
 
+    public float Score
+    {
+        get { return m_Score; }
+    }
+
     // Private Fields
     private float m_RotationSpeed;
     private bool m_IsComplete = false;
