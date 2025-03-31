@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 
         if (Customer1.State == CustomerState.Waiting && m_CurrentState == GameState.CustomerInteraction)
         {
-            print("Starting minigame 0");
+            //print("Starting minigame 0");
             m_CurrentState = GameState.Minigame0Started;
             Camera.main.transform.position = MiniGame0CameraLocation;
             MiniGame0.GiveCustomerParameters(Customer1.Order[0], Customer1.Order[1], Customer1.Order[2]);
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
 
             RandomContainer.PlaySound(true);
 
-            print("Starting minigame 1");
+            //print("Starting minigame 1");
             m_CurrentState = GameState.Minigame0Complete;
             m_CurrentState = GameState.Minigame1Started;
             Camera.main.transform.position = MiniGame1CameraLocation;

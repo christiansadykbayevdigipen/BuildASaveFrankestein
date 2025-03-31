@@ -81,6 +81,9 @@ public class MG0 : MiniGame
 
     public override bool IsComplete()
     {
+        if (m_debugOverriden)
+            return true;
+
         if (Head != null && Torso != null && Legs != null)
         {
             return true;
@@ -97,5 +100,12 @@ public class MG0 : MiniGame
         }
 
         return false;
+    }
+
+    private bool m_debugOverriden = false;
+
+    public void debug_OverrideComplete()
+    {
+        m_debugOverriden = true;
     }
 }
