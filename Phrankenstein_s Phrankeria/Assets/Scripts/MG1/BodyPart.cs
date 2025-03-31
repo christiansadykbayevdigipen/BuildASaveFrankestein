@@ -22,8 +22,8 @@ public enum BodyPartType
 
 public enum Oscillation
 {
-    Up,
-    Down
+    Left,
+    Right
 }
 
 [System.Serializable]
@@ -38,7 +38,7 @@ public class BodyPart : MonoBehaviour
 {
     // Editor Fields
     public BodyPartType PartType;
-    public Vector2 PerfectPosition;
+    public Transform PerfectPosition;
     public float PerfectDistance, GreatDistance, OkayDistance;
     public BodyType BodyPartType;
 
@@ -72,29 +72,29 @@ public class BodyPart : MonoBehaviour
         if(Activated && !m_PerformedFirstTime)
         {
             m_StartingLocation = transform.position;
-            m_EndingLocation = new Vector2(transform.position.x, transform.position.y - EndingLocation);
-            m_CurrentDirection = Oscillation.Down;
+            m_EndingLocation = new Vector2(transform.position.x+EndingLocation, transform.position.y);
+            m_CurrentDirection = Oscillation.Right;
             m_PerformedFirstTime = true;
         }
 
         switch (m_CurrentDirection)
         {
-        case Oscillation.Up:
-                transform.position = new Vector3(transform.position.x, transform.position.y + OscillatorSpeed * Time.deltaTime, transform.position.z);
+        case Oscillation.Left:
+                transform.position = new Vector3(transform.position.x - OscillatorSpeed * Time.deltaTime, transform.position.y, transform.position.z);
 
-                if(transform.position.y > m_StartingLocation.y)
+                if(transform.position.x < m_StartingLocation.x)
                 {
-                    transform.position = new Vector3(transform.position.x, m_StartingLocation.y, transform.position.z);
-                    m_CurrentDirection = Oscillation.Down;
+                    transform.position = new Vector3(m_StartingLocation.x, transform.position.y, transform.position.z);
+                    m_CurrentDirection = Oscillation.Right;
                 }
                 break;
-        case Oscillation.Down:
-                transform.position = new Vector3(transform.position.x, transform.position.y - OscillatorSpeed * Time.deltaTime, transform.position.z);
+        case Oscillation.Right:
+                transform.position = new Vector3(transform.position.x + OscillatorSpeed * Time.deltaTime, transform.position.y, transform.position.z);
 
-                if(transform.position.y < m_EndingLocation.y)
+                if(transform.position.x > m_EndingLocation.x)
                 {
-                    transform.position = new Vector3(transform.position.x, m_EndingLocation.y, transform.position.z);
-                    m_CurrentDirection = Oscillation.Up;
+                    transform.position = new Vector3(m_EndingLocation.x, transform.position.y, transform.position.z);
+                    m_CurrentDirection = Oscillation.Left;
                 }
                 break;
         default:
@@ -105,7 +105,7 @@ public class BodyPart : MonoBehaviour
 
     public Accuracy GetAccuracy()
     {
-        float dist = Vector2.Distance(transform.position, PerfectPosition);
+        float dist = Vector2.Distance(transform.position, PerfectPosition.position);
 
         if (dist <= PerfectDistance) return Accuracy.Perfect;
         else if (dist <= GreatDistance) return Accuracy.Great;

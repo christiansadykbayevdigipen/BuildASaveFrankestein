@@ -9,13 +9,17 @@ using UnityEngine;
 public class MG1 : MiniGame
 {
     // Editor Fields
-    public Vector2 HeadStart;
-    public Vector2 TorsoStart;
-    public Vector2 LegsStart;
+    public Transform HeadStart;
+    public Transform TorsoStart;
+    public Transform LegsStart;
 
-    public Vector2 HeadEnd;
-    public Vector2 TorsoEnd;
-    public Vector2 LegsEnd;
+    public Transform HeadEnd;
+    public Transform TorsoEnd;
+    public Transform LegsEnd;
+
+    public Transform PerfectHeadPosition;
+    public Transform PerfectTorsoPosition;
+    public Transform PerfectLegsPosition;
 
     public TMP_Text Feedback;
 
@@ -50,9 +54,9 @@ public class MG1 : MiniGame
     public override void StartMinigame()
     {
         /*-----Refactor later-----*/
-        Head.transform.position = HeadStart;
-        Torso.transform.position = TorsoStart;
-        Legs.transform.position = LegsStart;
+        Head.transform.position = HeadStart.position;
+        Torso.transform.position = TorsoStart.position;
+        Legs.transform.position = LegsStart.position;
 
         Head.Activated = false;
         Torso.Activated = false;
@@ -62,13 +66,18 @@ public class MG1 : MiniGame
 
 
         m_IsRunning = true;
-        Head.transform.position = HeadStart;
-        Torso.transform.position = TorsoStart;
-        Legs.transform.position = LegsStart;
+        Head.transform.position = HeadStart.position;
+        Torso.transform.position = TorsoStart.position;
+        Legs.transform.position = LegsStart.position;
 
-        Head.EndingLocation = Mathf.Abs(Vector2.Distance(HeadStart, HeadEnd));
-        Torso.EndingLocation = Mathf.Abs(Vector2.Distance(TorsoStart, TorsoEnd));
-        Legs.EndingLocation = Mathf.Abs(Vector2.Distance(LegsStart, LegsEnd));
+        Head.EndingLocation = Mathf.Abs(Vector2.Distance(HeadStart.position, HeadEnd.position));
+        Torso.EndingLocation = Mathf.Abs(Vector2.Distance(TorsoStart.position, TorsoEnd.position));
+        Legs.EndingLocation = Mathf.Abs(Vector2.Distance(LegsStart.position, LegsEnd.position));
+
+        Head.PerfectPosition = PerfectHeadPosition;
+        Torso.PerfectPosition = PerfectTorsoPosition;
+        Legs.PerfectPosition = PerfectLegsPosition;
+
 
         // Start the Minigame.
         Head.Activated = true;
