@@ -16,7 +16,8 @@ public class MG2 : MiniGame
     public float StartingRotationSpeed = 50f;
     public float RotationAcceleration;
     public float Seconds = 30f;
-    public RandomContainer RandomContainer;
+    public RandomContainer CorrectClick;
+    public RandomContainer WrongClick;
 
     // The minimum number of hits that a player needs to get.
     public int RequiredHits;
@@ -154,7 +155,7 @@ public class MG2 : MiniGame
                 Vector3 oldPos = WinBar.transform.position;
                 SetRandomPosition();
 
-                RandomContainer.PlaySound(true);
+                CorrectClick.PlaySound(true);
 
                 Vector3 newPos = WinBar.transform.position;
 
@@ -172,6 +173,7 @@ public class MG2 : MiniGame
             else
             {
                 StartCoroutine(GameManager.MasterManager.InformPlayer("Miss!", 0.5f));
+                WrongClick.PlaySound(true);
                 m_Losses++;
             }
         }
