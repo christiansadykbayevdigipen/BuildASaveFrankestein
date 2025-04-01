@@ -30,7 +30,10 @@ public enum Oscillation
 public enum BodyType
 {
     Jacked,
-    Normal
+    Normal,
+    Kid,
+    Robot,
+    Skeleton
 }
 
 [System.Serializable]
