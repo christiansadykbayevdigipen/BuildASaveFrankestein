@@ -17,6 +17,8 @@ public class MG0 : MiniGame
     public BodyPart Head;
     public BodyPart Torso;
     public BodyPart Legs;
+    public RandomContainer MainBodyParts;
+    public RandomContainer HeadJars;
 
     // Private Fields
     private bool m_MinigameRunning;
@@ -63,14 +65,17 @@ public class MG0 : MiniGame
                     if(part.PartType == BodyPartType.Head)
                     {
                         Head = part;
+                        HeadJars.PlaySound(true);
                     }
                     if(part.PartType == BodyPartType.Body)
                     {
                         Torso = part;
+                        MainBodyParts.PlaySound(true);
                     }
                     if(part.PartType == BodyPartType.Legs)
                     {
                         Legs = part;
+                        MainBodyParts.PlaySound(true);
                     }
                 } 
             }
