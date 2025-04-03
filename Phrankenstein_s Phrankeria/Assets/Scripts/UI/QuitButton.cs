@@ -7,6 +7,6 @@ public class QuitButton : MonoBehaviour
 {
     public void OnQuit()
     {
-        SceneManager.LoadScene("MainMenu");
+       Application.Quit();
     }
 }
