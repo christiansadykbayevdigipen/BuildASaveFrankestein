@@ -31,7 +31,7 @@ public enum BodyType
 {
     Jacked,
     Normal,
-    Kid,
+
     Robot,
     Skeleton
 }

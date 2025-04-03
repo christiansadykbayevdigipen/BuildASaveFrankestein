@@ -72,7 +72,7 @@ public class Customer : MonoBehaviour
         if(m_State == CustomerState.Talking)
         {
             m_Order.Clear();
-            BodyType[] availableColors = { BodyType.Jacked, BodyType.Normal, BodyType.Kid, BodyType.Robot, BodyType.Skeleton };
+            BodyType[] availableColors = { BodyType.Jacked, BodyType.Normal, BodyType.Robot, BodyType.Skeleton };
 
             for (int i = 0; i < 3; i++)
             {
