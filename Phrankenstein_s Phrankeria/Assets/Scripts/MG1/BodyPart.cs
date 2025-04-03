@@ -57,6 +57,7 @@ public class BodyPart : MonoBehaviour
     private Vector2 m_EndingLocation;
     private Oscillation m_CurrentDirection;
     private bool m_PerformedFirstTime = false;
+    private Collider2D m_Collider2D;
 
     // Public Fields
     public bool Activated = false;
@@ -64,7 +65,7 @@ public class BodyPart : MonoBehaviour
 
     private void Awake()
     {
-
+        m_Collider2D = GetComponent<Collider2D>();
     }
 
     private void Update()
@@ -108,7 +109,7 @@ public class BodyPart : MonoBehaviour
 
     public Accuracy GetAccuracy()
     {
-        float dist = Vector2.Distance(transform.position, PerfectPosition.position);
+        float dist = Vector2.Distance(m_Collider2D.bounds.center, PerfectPosition.position);
 
         if (dist <= PerfectDistance) return Accuracy.Perfect;
         else if (dist <= GreatDistance) return Accuracy.Great;

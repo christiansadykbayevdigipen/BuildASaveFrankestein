@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum CustomerState
 {
@@ -27,6 +28,7 @@ public class Customer : MonoBehaviour
     public float CustomerWalkSpeed;
 
     public TMP_Text CustomerSpeech;
+    public Image CustomerSpeechBox;
 
     public Vector2 StartingPosition;
 
@@ -57,7 +59,16 @@ public class Customer : MonoBehaviour
 
     private void Update()
     {
-        if(m_State == CustomerState.Walking)
+        if(CustomerSpeech.text == "")
+        {
+            CustomerSpeechBox.enabled = false;
+        }
+        else
+        {
+            CustomerSpeechBox.enabled = true;
+        }
+
+        if (m_State == CustomerState.Walking)
         {
             if(transform.position.x <= EndPoint.transform.position.x)
             {

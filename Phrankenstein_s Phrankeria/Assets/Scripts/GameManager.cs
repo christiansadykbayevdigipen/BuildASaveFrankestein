@@ -6,6 +6,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
     public Customer Customer1;
     public TMP_Text InfoText;
     public RandomContainer RandomContainer;
+    public Button TicketButton;
+    public Ticket Ticket;
 
     // Public Fields
     public static GameManager MasterManager;
@@ -49,6 +52,7 @@ public class GameManager : MonoBehaviour
         Customer1.State = CustomerState.Walking;
         m_Strikes = 0;
         m_AlreadyPrintedFailMsg = false;
+        TicketButton.gameObject.SetActive(false);
     }
 
     private void _InvokeFailure()
@@ -74,6 +78,7 @@ public class GameManager : MonoBehaviour
 
         if (Customer1.State == CustomerState.Waiting && m_CurrentState == GameState.CustomerInteraction)
         {
+            TicketButton.gameObject.SetActive(true);
             //print("Starting minigame 0");
             m_CurrentState = GameState.Minigame0Started;
             Camera.main.transform.position = MiniGame0CameraLocation;
@@ -123,13 +128,14 @@ public class GameManager : MonoBehaviour
             MiniGame2.StartMinigame();
         }
 
-        if(m_CurrentState == GameState.Minigame2Started && MiniGame2.IsComplete())
+        if (m_CurrentState == GameState.Minigame2Started && MiniGame2.IsComplete())
         {
             RandomContainer.PlaySound(true);
             m_CurrentState = GameState.Minigame2Complete;
             m_CurrentState = GameState.AllGamesDone;
             MiniGame2.StopMinigame();
             StartCoroutine(Finish());
+            TicketButton.gameObject.SetActive(false);
         }
     }
 
