@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Win thing
+  - SpeechBox
   layers:
   - Default
   - TransparentFX

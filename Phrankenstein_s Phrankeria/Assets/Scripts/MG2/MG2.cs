@@ -19,6 +19,8 @@ public class MG2 : MiniGame
     public RandomContainer CorrectClick;
     public RandomContainer WrongClick;
 
+    public Transform Head, Body, Legs;
+
     // The minimum number of hits that a player needs to get.
     public int RequiredHits;
 

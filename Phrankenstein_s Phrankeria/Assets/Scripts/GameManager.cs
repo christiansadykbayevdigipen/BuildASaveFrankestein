@@ -1,5 +1,6 @@
 // Author: Christian Sadykbayev
 // This script handles the behaviour of the game. This script contains locations for each seperate mini game, since all of the minigames will be in the same scene. This is so that there is seamlessness between each minigame, and there isn't any hiccups trying to copy information over scenes.
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,6 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public enum GameState
 {
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
     public Button TicketButton;
     public Ticket Ticket;
 
+    public List<GameObject> CustomerPool;
+
     // Public Fields
     public static GameManager MasterManager;
 
@@ -53,6 +57,12 @@ public class GameManager : MonoBehaviour
         m_Strikes = 0;
         m_AlreadyPrintedFailMsg = false;
         TicketButton.gameObject.SetActive(false);
+        GameObject.Destroy(Customer1.gameObject);
+
+        int index = Random.Range(0, CustomerPool.Count - 1);
+
+        Customer1 = GameObject.Instantiate(CustomerPool[index]).GetComponent<Customer>();
+        Customer1.State = CustomerState.Walking;
     }
 
     private void _InvokeFailure()
@@ -74,6 +84,14 @@ public class GameManager : MonoBehaviour
                 m_AlreadyPrintedFailMsg = true;
             }
             return;
+        }
+
+        if(Customer1.State == CustomerState.RemoveYourself)
+        {
+            GameObject.Destroy(Customer1.gameObject);
+            int index = Random.Range(0, CustomerPool.Count - 1);
+            Customer1 = GameObject.Instantiate(CustomerPool[index]).GetComponent<Customer>();
+            Customer1.State = CustomerState.Walking;
         }
 
         if (Customer1.State == CustomerState.Waiting && m_CurrentState == GameState.CustomerInteraction)
@@ -125,6 +143,11 @@ public class GameManager : MonoBehaviour
             m_CurrentState = GameState.Minigame2Started;
             MiniGame1.StopMinigame();
             Camera.main.transform.position = MiniGame2CameraLocation;
+
+            MiniGame2.Head.GetComponent<SpriteRenderer>().sprite = MiniGame1.Head.GetComponent<SpriteRenderer>().sprite;
+            MiniGame2.Body.GetComponent<SpriteRenderer>().sprite = MiniGame1.Torso.GetComponent<SpriteRenderer>().sprite;
+            MiniGame2.Legs.GetComponent<SpriteRenderer>().sprite = MiniGame1.Legs.GetComponent<SpriteRenderer>().sprite;
+
             MiniGame2.StartMinigame();
         }
 
