@@ -52,6 +52,7 @@ public class Ticket : MonoBehaviour
 
     public void OnClick()
     {
+        print("Click");
         if(!m_Clicked)
         {
             _ShowTicket();

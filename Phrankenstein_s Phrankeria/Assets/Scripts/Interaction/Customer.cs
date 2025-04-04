@@ -32,8 +32,14 @@ public class Customer : MonoBehaviour
 
     public Vector2 StartingPosition;
 
+    public Animator DoorsAnimator;
+
     // Affects the speed at which speech is displayed to the screen
-    public float SpeechCharacterDelay; 
+    public float SpeechCharacterDelay;
+
+    public Sprite Starting;
+    public Sprite Happy;
+    public Sprite Mad;
 
     // Private Fields
     private CustomerState m_State;
@@ -54,7 +60,12 @@ public class Customer : MonoBehaviour
 
     private void Awake()
     {
+        GetComponent<SpriteRenderer>().enabled = false;
         m_Order = new List<BodyType>();
+        CustomerSpeech = GameObject.Find("Speech").GetComponent<TMP_Text>();
+        CustomerSpeechBox = GameObject.FindWithTag("SpeechBox").GetComponent<Image>();
+        DoorsAnimator = GameObject.Find("DOORS LAYER").GetComponent<Animator>();
+
     }
 
     private void Update()
@@ -82,6 +93,10 @@ public class Customer : MonoBehaviour
 
         if(m_State == CustomerState.Talking)
         {
+            GetComponent<SpriteRenderer>().enabled = true;
+            transform.position = new Vector3(transform.position.x, transform.position.y-1.5f, transform.position.z);
+            DoorsAnimator.SetBool("Open", true);
+
             m_Order.Clear();
             BodyType[] availableColors = { BodyType.Jacked, BodyType.Normal, BodyType.Robot, BodyType.Skeleton };
 
@@ -128,6 +143,8 @@ public class Customer : MonoBehaviour
         if(m_State == CustomerState.Angry)
         {
             StartCoroutine(Typewriter("What is this? This is nothing like what I ordered! I ordered an intact Phrankenstein, instead I got whatever this is! I am DONE!", 0.02f, CustomerState.RemoveYourself));
+
+
             m_State = CustomerState.None;
         }
 
@@ -148,6 +165,11 @@ public class Customer : MonoBehaviour
             {
                 m_State = stateAfterFinished;
                 m_TypewriterIndex = 0;
+
+                if(m_State == CustomerState.RemoveYourself)
+                {
+                    DoorsAnimator.SetBool("Open", false);
+                }
                 yield break;
             }
 
