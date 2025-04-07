@@ -13,6 +13,14 @@ PrefabInstance:
       value: Grandma
       objectReference: {fileID: 0}
     - target: {fileID: 3747743184509895462, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747743184509895462, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747743184509895462, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.56
       objectReference: {fileID: 0}
@@ -53,6 +61,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_Size.x
+      value: 4.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_Size.y
+      value: 5.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 03c731f9c350eb34aac31f72798772f0, type: 3}
@@ -75,15 +91,15 @@ PrefabInstance:
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: DoorsAnimator
       value: 
-      objectReference: {fileID: 5521096148305822675, guid: f254ecfe0c881594c9d3fc874a6c8522, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: CustomerSpeech
       value: 
-      objectReference: {fileID: 7765545563658477081, guid: 162b7693dabc6704aa370e6861f862f9, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: CustomerSpeechBox
       value: 
-      objectReference: {fileID: 8791690363084685082, guid: 4c7a430430d0df048b7ab8adc97718a8, type: 3}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

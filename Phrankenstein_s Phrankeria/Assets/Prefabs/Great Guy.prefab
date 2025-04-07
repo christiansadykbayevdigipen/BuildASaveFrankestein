@@ -13,6 +13,14 @@ PrefabInstance:
       value: Great Guy
       objectReference: {fileID: 0}
     - target: {fileID: 3747743184509895462, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747743184509895462, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747743184509895462, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.56
       objectReference: {fileID: 0}
@@ -51,6 +59,14 @@ PrefabInstance:
     - target: {fileID: 3747743184509895462, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_Size.x
+      value: 10.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_Size.y
+      value: 4.53
       objectReference: {fileID: 0}
     - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_Sprite

@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     // Public Fields
     public static GameManager MasterManager;
+    public static float OverallScore;
 
     // Private Fields
     private int m_Strikes;
@@ -193,6 +194,7 @@ public class GameManager : MonoBehaviour
         if (MiniGame1.GetWinState() && MiniGame0.GetWinState() && MiniGame2.GetWinState())
         {
             StartCoroutine(InformPlayer("Good job! +" + (MiniGame1.Points + MiniGame2.Score) + " points!", 2.0f));
+            OverallScore += MiniGame1.Points + MiniGame2.Score;
             Customer1.State = CustomerState.Received;
         }
         else

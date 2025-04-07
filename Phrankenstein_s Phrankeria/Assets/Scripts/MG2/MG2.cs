@@ -134,7 +134,7 @@ public class MG2 : MiniGame
         }
 
         //To stop the needle from going more then 180 degrees 
-        if (m_RotationSpeed <= 0f && zRotation > 179 && zRotation < 181)
+        if (m_RotationSpeed <= 0f && zRotation > 150 && zRotation < 181)
         {
             m_RotationSpeed = -m_RotationSpeed;
         }
