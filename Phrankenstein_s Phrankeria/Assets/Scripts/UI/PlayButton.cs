@@ -9,6 +9,6 @@ public class PlayButton : MonoBehaviour
 {
     public void OnPlay()
     {
-        SceneManager.LoadScene("StoreSetting");
+        SceneManager.LoadScene("Store Setting Final");
     }
 }

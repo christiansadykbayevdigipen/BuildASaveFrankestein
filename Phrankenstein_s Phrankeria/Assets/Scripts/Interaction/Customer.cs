@@ -125,6 +125,7 @@ public class Customer : MonoBehaviour
 
         if(m_State == CustomerState.Received)
         {
+            GetComponent<SpriteRenderer>().sprite = Happy;
             StartCoroutine(Typewriter("Thank's for doing my order man! Pleasure doing business with you.", 0.08f, CustomerState.RemoveYourself));
             m_State = CustomerState.None;
         }
@@ -142,6 +143,7 @@ public class Customer : MonoBehaviour
 
         if(m_State == CustomerState.Angry)
         {
+            GetComponent<SpriteRenderer>().sprite = Mad;
             StartCoroutine(Typewriter("What is this? This is nothing like what I ordered! I ordered an intact Phrankenstein, instead I got whatever this is! I am DONE!", 0.02f, CustomerState.RemoveYourself));
 
 

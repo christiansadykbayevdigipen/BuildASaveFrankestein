@@ -115,6 +115,15 @@ public class GameManager : MonoBehaviour
                             return;
                         }*/
 
+            // Removes the ticket button
+            TicketButton.gameObject.SetActive(false);
+
+            // If the ticket is still showing, hide it.
+            if (Ticket.GetClickedState())
+            {
+                Ticket.OnClick();
+            }
+
             RandomContainer.PlaySound(true);
 
             //print("Starting minigame 1");
@@ -139,7 +148,7 @@ public class GameManager : MonoBehaviour
         if(m_CurrentState == GameState.Minigame1Complete)
         {
             RandomContainer.PlaySound(true);
-            StartCoroutine(InformPlayer("You need 10 successful hits on the voltage meter!", 3.0f));
+            StartCoroutine(InformPlayer("Ten hits are needed on the Voltage Meter!", 3.0f));
             m_CurrentState = GameState.Minigame2Started;
             MiniGame1.StopMinigame();
             Camera.main.transform.position = MiniGame2CameraLocation;
@@ -158,7 +167,6 @@ public class GameManager : MonoBehaviour
             m_CurrentState = GameState.AllGamesDone;
             MiniGame2.StopMinigame();
             StartCoroutine(Finish());
-            TicketButton.gameObject.SetActive(false);
         }
     }
 
@@ -184,7 +192,7 @@ public class GameManager : MonoBehaviour
 
         if (MiniGame1.GetWinState() && MiniGame0.GetWinState() && MiniGame2.GetWinState())
         {
-            StartCoroutine(InformPlayer("Successfully completed Customer's order! Points alloted: " + (MiniGame1.Points + MiniGame2.Score), 2.0f));
+            StartCoroutine(InformPlayer("Good job! +" + (MiniGame1.Points + MiniGame2.Score) + " points!", 2.0f));
             Customer1.State = CustomerState.Received;
         }
         else

@@ -50,6 +50,11 @@ public class Ticket : MonoBehaviour
         }
     }
 
+    public bool GetClickedState()
+    {
+        return m_Clicked;
+    }
+
     public void OnClick()
     {
         print("Click");
