@@ -62,20 +62,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_Size.x
-      value: 6.83
+      value: 3.67
       objectReference: {fileID: 0}
     - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_Size.y
-      value: 9.01
+      value: 5.98
       objectReference: {fileID: 0}
     - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 48a8e59d3a0b55a4e92a845ee07a5cee, type: 3}
+      objectReference: {fileID: -1179259176, guid: 48a8e59d3a0b55a4e92a845ee07a5cee, type: 3}
+    - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: Mad
       value: 
-      objectReference: {fileID: 21300000, guid: edf521ad05ff317429fb27b0ef57c25b, type: 3}
+      objectReference: {fileID: 2099166426, guid: edf521ad05ff317429fb27b0ef57c25b, type: 3}
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: Happy
       value: 
@@ -87,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: Starting
       value: 
-      objectReference: {fileID: 21300000, guid: 48a8e59d3a0b55a4e92a845ee07a5cee, type: 3}
+      objectReference: {fileID: -1179259176, guid: 48a8e59d3a0b55a4e92a845ee07a5cee, type: 3}
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: DoorsAnimator
       value: 

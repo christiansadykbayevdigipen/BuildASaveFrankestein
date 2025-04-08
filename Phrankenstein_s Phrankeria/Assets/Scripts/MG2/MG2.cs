@@ -18,6 +18,11 @@ public class MG2 : MiniGame
     public float Seconds = 30f;
     public RandomContainer CorrectClick;
     public RandomContainer WrongClick;
+    public GameObject Needle;
+    public GameObject LeftmostBounds;
+    public GameObject RightmostBounds;
+
+    public Vector3 MinRotation, MaxRotation;
 
     public Transform Head, Body, Legs;
 
@@ -133,7 +138,7 @@ public class MG2 : MiniGame
             transform.RotateAround(PivotPoint.position, Vector3.forward, m_RotationSpeed * Time.deltaTime);
         }
 
-        //To stop the needle from going more then 180 degrees 
+/*        //To stop the needle from going more then 180 degrees 
         if (m_RotationSpeed <= 0f && zRotation > 150 && zRotation < 181)
         {
             m_RotationSpeed = -m_RotationSpeed;
@@ -143,6 +148,18 @@ public class MG2 : MiniGame
         if (m_RotationSpeed >= -0f && zRotation > 0.1 && zRotation < 2)
         {
             m_RotationSpeed = -m_RotationSpeed;
+        }*/
+
+        if(Needle.GetComponent<BoxCollider2D>().IsTouching(LeftmostBounds.GetComponent<BoxCollider2D>()))
+        {
+            //m_RotationSpeed = -m_RotationSpeed;
+            m_RotationSpeed = -Mathf.Abs(m_RotationSpeed);
+        }
+
+        if (Needle.GetComponent<BoxCollider2D>().IsTouching(RightmostBounds.GetComponent<BoxCollider2D>()))
+        {
+            //m_RotationSpeed = -m_RotationSpeed;
+            m_RotationSpeed = Mathf.Abs(m_RotationSpeed);
         }
 
         // Detection for if the needle is on the right point and if so then makes the point go to a new position

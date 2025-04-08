@@ -54,24 +54,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_Size.x
-      value: 4.08
+      value: 4.17
       objectReference: {fileID: 0}
     - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_Size.y
-      value: 5.07
+      value: 5.06
       objectReference: {fileID: 0}
     - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9fc7818ce9d65d34895008a71cad02e2, type: 3}
+      objectReference: {fileID: 1370134636, guid: 9fc7818ce9d65d34895008a71cad02e2, type: 3}
+    - target: {fileID: 6142263183440638343, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: Mad
       value: 
-      objectReference: {fileID: 21300000, guid: 451fe6e390537f845b6cf76ef52654e8, type: 3}
+      objectReference: {fileID: -1527992081, guid: 451fe6e390537f845b6cf76ef52654e8, type: 3}
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: Happy
       value: 
-      objectReference: {fileID: 21300000, guid: 97dea9cef68c8734ba399f79d7c0db5a, type: 3}
+      objectReference: {fileID: -1872289974, guid: 97dea9cef68c8734ba399f79d7c0db5a, type: 3}
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: EndPoint
       value: 
@@ -79,7 +83,7 @@ PrefabInstance:
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: Starting
       value: 
-      objectReference: {fileID: 21300000, guid: 9fc7818ce9d65d34895008a71cad02e2, type: 3}
+      objectReference: {fileID: 1370134636, guid: 9fc7818ce9d65d34895008a71cad02e2, type: 3}
     - target: {fileID: 6671828347223712655, guid: 6ce7072f0cb94964f9a8faa7ed306e18, type: 3}
       propertyPath: DoorsAnimator
       value: 
